@@ -118,18 +118,12 @@ contract HashVaulat is Initializable, OwnableUpgradeable {
         if (amount > maxWithdrawAmount[token]) {
             revert InvalidWithdrawAmount();
         }
-        if (token != address(0)) {
-            uint256 tokenBalance = IERC20(token).balanceOf(address(this));
-            if (amount > tokenBalance) {
-                _redeem(token, amount);
-            }
-            IERC20(token).transfer(user, amount);
-        } else {
-            (bool success, ) = user.call{ value: amount }("");
-            if (!success) {
-                revert();
-            }
+
+        if (stakeTokens[token] && amount > _getBalance(token)) {
+            _redeem(token, amount);
         }
+
+        _transferTo(token, user, amount);
 
         emit Withdraw(orderId, user, token, amount, block.timestamp);
     }
@@ -151,16 +145,21 @@ contract HashVaulat is Initializable, OwnableUpgradeable {
         betId[orderId] = true;
         address game = _checkGameNo(gameNo);
         address guaranteeAddr = IHashGame(game).guarantee();
+
         if (token == address(0)) {
-            if (amount != msg.value) {
-                revert InvalidBetAmount();
+            if (amount != msg.value) revert InvalidBetAmount();
+            (bool success, ) = game.call{ value: amount }("");
+            if (!success) {
+                revert();
             }
         } else {
-            if (guaranteeAmt > 0 && guaranteeAddr != address(0)) {
-                IERC20(token).safeTransferFrom(guaranteeAddr, game, amount);
-            }
-            IERC20(token).safeTransferFrom(user, game, amount);
+            _transferFrom(token, user, game, amount);
         }
+
+        if (guaranteeAmt > 0 && guaranteeAddr != address(0) && token != address(0)) {
+            _transferFrom(token, guaranteeAddr, game, guaranteeAmt);
+        }
+
         emit Bet(orderId, user, gameNo, issue, block.timestamp);
     }
 
@@ -176,25 +175,34 @@ contract HashVaulat is Initializable, OwnableUpgradeable {
         require(!betId[orderId], "Order exist");
         betId[orderId] = true;
         address game = _checkGameNo(gameNo);
+        address guaranteeAddr = IHashGame(game).guarantee();
 
+        if (guaranteeAmt > 0 && guaranteeAddr != address(0) && token != address(0)) {
+            _transferFrom(token, guaranteeAddr, game, guaranteeAmt);
+        }
+        if (stakeTokens[token] && amount > _getBalance(token)) {
+            _redeem(token, amount);
+        }
+        _transferTo(token, game, amount);
+
+        emit TransferAdmin(orderId, gameNo, issue, block.timestamp);
+    }
+
+    function _getBalance(address token) internal view returns (uint256) {
+        return token == address(0) ? address(this).balance : IERC20(token).balanceOf(address(this));
+    }
+    function _transferTo(address token, address to, uint256 amt) internal {
         if (token == address(0)) {
-            (bool success, ) = game.call{ value: amount }("");
+            (bool success, ) = to.call{ value: amt }("");
             if (!success) {
                 revert();
             }
         } else {
-            address guaranteeAddr = IHashGame(game).guarantee();
-            if (guaranteeAmt > 0 && guaranteeAddr != address(0)) {
-                IERC20(token).safeTransferFrom(guaranteeAddr, game, amount);
-            }
-            uint256 tokenBalance = IERC20(token).balanceOf(address(this));
-            if (amount > tokenBalance) {
-                _redeem(token, amount);
-            }
-
-            IERC20(token).transfer(game, amount);
+            IERC20(token).transfer(to, amt);
         }
-        emit TransferAdmin(orderId, gameNo, issue, block.timestamp);
+    }
+    function _transferFrom(address token, address from, address to, uint256 amt) internal {
+        IERC20(token).safeTransferFrom(from, to, amt);
     }
 
     function _checkGameNo(uint256 gameNo) internal view returns (address game) {

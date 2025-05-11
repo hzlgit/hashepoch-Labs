@@ -4,7 +4,7 @@ import { DeployFunction } from "hardhat-deploy/types";
 import { HardhatRuntimeEnvironment } from "hardhat/types";
 
 const manager = "0xdd107da03a4ac10914eba256f8eaa32fc735003a";
-const factory = "0x22c1972d4177F1f39454CB0f80a925C148614566";
+const factory = "0x6acCF37e002d55ECB6C59347D36df8f6871A548F";
 const vaulat = "0x714870047CAD91bdC8308Eb193Dc2B035d0453c9";
 const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   const { deployer } = await hre.getNamedAccounts();
@@ -17,10 +17,10 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   });
 
   const HashVaulat = await hre.ethers.getContractFactory("HashVaulat", signer);
-  // console.log(deployer);
-  // const Vaulat = await upgrades.upgradeProxy(vaulat, HashVaulat, {});
-  // await Vaulat.waitForDeployment();
-  // const vaulat_Address = await Vaulat.getAddress();
+  console.log(deployer);
+  const Vaulat = await upgrades.upgradeProxy(vaulat, HashVaulat, {});
+  await Vaulat.waitForDeployment();
+  const vaulat_Address = await Vaulat.getAddress();
 
   console.log(`HashVaulat contract: `, vaulat);
 
@@ -31,9 +31,9 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
     log: true,
   });
 
-  // const tx2 = await Vaulat.setAdmin(manager);
-  // await tx2.wait();
-  // await Vaulat.setFactory(factory.address);
+  const tx2 = await Vaulat.setAdmin(manager);
+  await tx2.wait();
+  await Vaulat.setFactory(factory.address);
 };
 export default func;
 func.id = "deploy_vaulat";

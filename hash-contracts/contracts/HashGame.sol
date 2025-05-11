@@ -72,7 +72,10 @@ contract HashGame is IHashGame, ReentrancyGuard {
         settled[issue] = true;
 
         for (uint256 i = 0; i < tokens.length; i++) {
-            uint256 total = IERC20(tokens[i]).balanceOf(address(this));
+            uint256 total = tokens[i] == address(0)
+                ? address(this).balance
+                : IERC20(tokens[i]).balanceOf(address(this));
+
             uint256 settleAmt = _amts[i];
             if (settleAmt > total) {
                 revert InvalidSettleAmount();
@@ -83,34 +86,30 @@ contract HashGame is IHashGame, ReentrancyGuard {
             uint256 balance = settleAmt;
             for (uint256 j = 0; j < accounts.length; j++) {
                 uint256 amt = (settleAmt * rates[i]) / BASE_RATE;
-                if (tokens[i] == address(0)) {
-                    (bool success, ) = accounts[j].call{ value: amt }("");
-                    if (!success) {
-                        revert();
-                    }
-                } else {
-                    IERC20(tokens[i]).transfer(accounts[j], amt);
-                }
-
+                _transferToken(tokens[i], accounts[j], amt);
                 balance -= amt;
             }
             if (balance > 0) {
-                if (tokens[i] == address(0)) {
-                    (bool success, ) = vaulat.call{ value: balance }("");
-                    if (!success) {
-                        revert();
-                    }
-                } else {
-                    IERC20(tokens[i]).transfer(vaulat, balance);
-                }
+                _transferToken(tokens[i], vaulat, balance);
             }
 
-            if (_guaranteeAmts[i] > 0 && tokens[i] != address(0) && guarantee != address(0)) {
-                IERC20(tokens[i]).transfer(guarantee, _guaranteeAmts[i]);
+            if (_guaranteeAmts[i] > 0 && guarantee != address(0)) {
+                _transferToken(tokens[i], guarantee, _guaranteeAmts[i]);
             }
         }
 
         emit GameSettled(issue, block.timestamp);
+    }
+
+    function _transferToken(address token, address to, uint256 amt) internal {
+        if (token == address(0)) {
+            (bool success, ) = to.call{ value: amt }("");
+            if (!success) {
+                revert();
+            }
+        } else {
+            IERC20(token).transfer(to, amt);
+        }
     }
 
     receive() external payable {
