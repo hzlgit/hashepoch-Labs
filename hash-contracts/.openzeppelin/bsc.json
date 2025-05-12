@@ -1,0 +1,423 @@
+{
+  "manifestVersion": "3.2",
+  "proxies": [
+    {
+      "address": "0x28DF6a991Ea2e66b5FB0b3006E32f90F147855D1",
+      "txHash": "0xceba2035357bdb9f4e0339bfeb95dadd53fd73126df0e5e8bd667436ed746b24",
+      "kind": "transparent"
+    },
+    {
+      "address": "0xbbFd4Cd8652C7E868dAaA77437BF6f6f6a5b559d",
+      "txHash": "0xb9bbd0084dc12113c33775a99566c0a1e4cf58d6a8c6a318eaca8ac64c8cacc1",
+      "kind": "transparent"
+    }
+  ],
+  "impls": {
+    "b29bd52f614c1bc374219c86a99721414666de45b54fce4a3a1162565727a7e2": {
+      "address": "0x22d899bAd4Cd71C44934d68381a1cd23516C8E84",
+      "txHash": "0x7bbac9e58e37b18794f44c85c77546c6ed3e7cb6a6ceb2e2e951823af4a64c5f",
+      "layout": {
+        "solcVersion": "0.8.28",
+        "storage": [
+          {
+            "label": "ADDRESSES_PROVIDER",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_contract(IPoolAddressesProvider)847",
+            "contract": "HashVaulat",
+            "src": "contracts/HashVaulat.sol:17"
+          },
+          {
+            "label": "POOL",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_contract(IPool)638",
+            "contract": "HashVaulat",
+            "src": "contracts/HashVaulat.sol:18"
+          },
+          {
+            "label": "supportTokens",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_mapping(t_address,t_bool)",
+            "contract": "HashVaulat",
+            "src": "contracts/HashVaulat.sol:19"
+          },
+          {
+            "label": "stakeTokens",
+            "offset": 0,
+            "slot": "3",
+            "type": "t_mapping(t_address,t_bool)",
+            "contract": "HashVaulat",
+            "src": "contracts/HashVaulat.sol:20"
+          },
+          {
+            "label": "withdrawId",
+            "offset": 0,
+            "slot": "4",
+            "type": "t_mapping(t_uint256,t_bool)",
+            "contract": "HashVaulat",
+            "src": "contracts/HashVaulat.sol:21"
+          },
+          {
+            "label": "betId",
+            "offset": 0,
+            "slot": "5",
+            "type": "t_mapping(t_uint256,t_bool)",
+            "contract": "HashVaulat",
+            "src": "contracts/HashVaulat.sol:22"
+          },
+          {
+            "label": "stakeEnable",
+            "offset": 0,
+            "slot": "6",
+            "type": "t_bool",
+            "contract": "HashVaulat",
+            "src": "contracts/HashVaulat.sol:23"
+          },
+          {
+            "label": "minStakeAmt",
+            "offset": 0,
+            "slot": "7",
+            "type": "t_mapping(t_address,t_uint256)",
+            "contract": "HashVaulat",
+            "src": "contracts/HashVaulat.sol:25"
+          },
+          {
+            "label": "maxWithdrawAmount",
+            "offset": 0,
+            "slot": "8",
+            "type": "t_mapping(t_address,t_uint256)",
+            "contract": "HashVaulat",
+            "src": "contracts/HashVaulat.sol:26"
+          },
+          {
+            "label": "manager",
+            "offset": 0,
+            "slot": "9",
+            "type": "t_address",
+            "contract": "HashVaulat",
+            "src": "contracts/HashVaulat.sol:28"
+          },
+          {
+            "label": "factory",
+            "offset": 0,
+            "slot": "10",
+            "type": "t_address",
+            "contract": "HashVaulat",
+            "src": "contracts/HashVaulat.sol:29"
+          },
+          {
+            "label": "admin",
+            "offset": 0,
+            "slot": "11",
+            "type": "t_address",
+            "contract": "HashVaulat",
+            "src": "contracts/HashVaulat.sol:30"
+          }
+        ],
+        "types": {
+          "t_address": {
+            "label": "address",
+            "numberOfBytes": "20"
+          },
+          "t_bool": {
+            "label": "bool",
+            "numberOfBytes": "1"
+          },
+          "t_struct(InitializableStorage)995_storage": {
+            "label": "struct Initializable.InitializableStorage",
+            "members": [
+              {
+                "label": "_initialized",
+                "type": "t_uint64",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "_initializing",
+                "type": "t_bool",
+                "offset": 8,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_struct(OwnableStorage)935_storage": {
+            "label": "struct OwnableUpgradeable.OwnableStorage",
+            "members": [
+              {
+                "label": "_owner",
+                "type": "t_address",
+                "offset": 0,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_uint64": {
+            "label": "uint64",
+            "numberOfBytes": "8"
+          },
+          "t_contract(IPool)638": {
+            "label": "contract IPool",
+            "numberOfBytes": "20"
+          },
+          "t_contract(IPoolAddressesProvider)847": {
+            "label": "contract IPoolAddressesProvider",
+            "numberOfBytes": "20"
+          },
+          "t_mapping(t_address,t_bool)": {
+            "label": "mapping(address => bool)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_address,t_uint256)": {
+            "label": "mapping(address => uint256)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_uint256,t_bool)": {
+            "label": "mapping(uint256 => bool)",
+            "numberOfBytes": "32"
+          },
+          "t_uint256": {
+            "label": "uint256",
+            "numberOfBytes": "32"
+          }
+        },
+        "namespaces": {
+          "erc7201:openzeppelin.storage.Ownable": [
+            {
+              "contract": "OwnableUpgradeable",
+              "label": "_owner",
+              "type": "t_address",
+              "src": "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol:24",
+              "offset": 0,
+              "slot": "0"
+            }
+          ],
+          "erc7201:openzeppelin.storage.Initializable": [
+            {
+              "contract": "Initializable",
+              "label": "_initialized",
+              "type": "t_uint64",
+              "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:69",
+              "offset": 0,
+              "slot": "0"
+            },
+            {
+              "contract": "Initializable",
+              "label": "_initializing",
+              "type": "t_bool",
+              "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:73",
+              "offset": 8,
+              "slot": "0"
+            }
+          ]
+        }
+      }
+    },
+    "0c2b57a56ed4fca7854a8f681daef4d1722b6c2b68862684ae2ca1ab781fe091": {
+      "address": "0x9c1575223f6E7521eB99e65EFC64e1e43ba4f0f5",
+      "txHash": "0xfa280d429a513d05e43b26225ad9fc0f7403cbee9a2ca52c472728bcf4f990fb",
+      "layout": {
+        "solcVersion": "0.8.28",
+        "storage": [
+          {
+            "label": "ADDRESSES_PROVIDER",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_contract(IPoolAddressesProvider)847",
+            "contract": "HashVaulat",
+            "src": "contracts/HashVaulat.sol:17"
+          },
+          {
+            "label": "POOL",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_contract(IPool)638",
+            "contract": "HashVaulat",
+            "src": "contracts/HashVaulat.sol:18"
+          },
+          {
+            "label": "supportTokens",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_mapping(t_address,t_bool)",
+            "contract": "HashVaulat",
+            "src": "contracts/HashVaulat.sol:19"
+          },
+          {
+            "label": "stakeTokens",
+            "offset": 0,
+            "slot": "3",
+            "type": "t_mapping(t_address,t_bool)",
+            "contract": "HashVaulat",
+            "src": "contracts/HashVaulat.sol:20"
+          },
+          {
+            "label": "withdrawId",
+            "offset": 0,
+            "slot": "4",
+            "type": "t_mapping(t_uint256,t_bool)",
+            "contract": "HashVaulat",
+            "src": "contracts/HashVaulat.sol:21"
+          },
+          {
+            "label": "betId",
+            "offset": 0,
+            "slot": "5",
+            "type": "t_mapping(t_uint256,t_bool)",
+            "contract": "HashVaulat",
+            "src": "contracts/HashVaulat.sol:22"
+          },
+          {
+            "label": "stakeEnable",
+            "offset": 0,
+            "slot": "6",
+            "type": "t_bool",
+            "contract": "HashVaulat",
+            "src": "contracts/HashVaulat.sol:23"
+          },
+          {
+            "label": "minStakeAmt",
+            "offset": 0,
+            "slot": "7",
+            "type": "t_mapping(t_address,t_uint256)",
+            "contract": "HashVaulat",
+            "src": "contracts/HashVaulat.sol:25"
+          },
+          {
+            "label": "maxWithdrawAmount",
+            "offset": 0,
+            "slot": "8",
+            "type": "t_mapping(t_address,t_uint256)",
+            "contract": "HashVaulat",
+            "src": "contracts/HashVaulat.sol:26"
+          },
+          {
+            "label": "manager",
+            "offset": 0,
+            "slot": "9",
+            "type": "t_address",
+            "contract": "HashVaulat",
+            "src": "contracts/HashVaulat.sol:28"
+          },
+          {
+            "label": "factory",
+            "offset": 0,
+            "slot": "10",
+            "type": "t_address",
+            "contract": "HashVaulat",
+            "src": "contracts/HashVaulat.sol:29"
+          },
+          {
+            "label": "admin",
+            "offset": 0,
+            "slot": "11",
+            "type": "t_address",
+            "contract": "HashVaulat",
+            "src": "contracts/HashVaulat.sol:30"
+          }
+        ],
+        "types": {
+          "t_address": {
+            "label": "address",
+            "numberOfBytes": "20"
+          },
+          "t_bool": {
+            "label": "bool",
+            "numberOfBytes": "1"
+          },
+          "t_struct(InitializableStorage)995_storage": {
+            "label": "struct Initializable.InitializableStorage",
+            "members": [
+              {
+                "label": "_initialized",
+                "type": "t_uint64",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "_initializing",
+                "type": "t_bool",
+                "offset": 8,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_struct(OwnableStorage)935_storage": {
+            "label": "struct OwnableUpgradeable.OwnableStorage",
+            "members": [
+              {
+                "label": "_owner",
+                "type": "t_address",
+                "offset": 0,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_uint64": {
+            "label": "uint64",
+            "numberOfBytes": "8"
+          },
+          "t_contract(IPool)638": {
+            "label": "contract IPool",
+            "numberOfBytes": "20"
+          },
+          "t_contract(IPoolAddressesProvider)847": {
+            "label": "contract IPoolAddressesProvider",
+            "numberOfBytes": "20"
+          },
+          "t_mapping(t_address,t_bool)": {
+            "label": "mapping(address => bool)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_address,t_uint256)": {
+            "label": "mapping(address => uint256)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_uint256,t_bool)": {
+            "label": "mapping(uint256 => bool)",
+            "numberOfBytes": "32"
+          },
+          "t_uint256": {
+            "label": "uint256",
+            "numberOfBytes": "32"
+          }
+        },
+        "namespaces": {
+          "erc7201:openzeppelin.storage.Ownable": [
+            {
+              "contract": "OwnableUpgradeable",
+              "label": "_owner",
+              "type": "t_address",
+              "src": "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol:24",
+              "offset": 0,
+              "slot": "0"
+            }
+          ],
+          "erc7201:openzeppelin.storage.Initializable": [
+            {
+              "contract": "Initializable",
+              "label": "_initialized",
+              "type": "t_uint64",
+              "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:69",
+              "offset": 0,
+              "slot": "0"
+            },
+            {
+              "contract": "Initializable",
+              "label": "_initializing",
+              "type": "t_bool",
+              "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:73",
+              "offset": 8,
+              "slot": "0"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

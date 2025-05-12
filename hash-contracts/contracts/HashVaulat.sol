@@ -49,10 +49,10 @@ contract HashVaulat is Initializable, OwnableUpgradeable {
     function initialize(address _manager, address _owner, address _addressesProvider) public initializer {
         __Ownable_init(_owner);
         manager = _manager;
-        // ADDRESSES_PROVIDER = IPoolAddressesProvider(_addressesProvider);
-        // POOL = IPool(ADDRESSES_PROVIDER.getPool());
+        ADDRESSES_PROVIDER = IPoolAddressesProvider(_addressesProvider);
+        POOL = IPool(ADDRESSES_PROVIDER.getPool());
         supportTokens[address(0)] = true;
-        maxWithdrawAmount[address(0)] = 5 * 1e18;
+        stakeEnable = true;
     }
 
     function getProvider() public view returns (address) {
@@ -283,6 +283,11 @@ contract HashVaulat is Initializable, OwnableUpgradeable {
         }
     }
 
+    function refoundGameAssets(uint256 gameNo) external onlyOwner {
+        address game = _checkGameNo(gameNo);
+        IHashGame(game).recover();
+    }
+
     function setFactory(address _factory) external onlyOwner {
         factory = _factory;
     }
@@ -292,7 +297,9 @@ contract HashVaulat is Initializable, OwnableUpgradeable {
     function setStakeEnabled(bool _enabled) external onlyOwner {
         stakeEnable = _enabled;
     }
-
+    function setStakeTokens(address _token, bool supped) external onlyOwner {
+        stakeTokens[_token] = supped;
+    }
     function setSupportTokens(address _token, bool supped) external onlyOwner {
         supportTokens[_token] = supped;
     }

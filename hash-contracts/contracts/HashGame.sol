@@ -35,6 +35,7 @@ contract HashGame is IHashGame, ReentrancyGuard {
     event GameSettled(uint256 indexed issue, uint);
     error InvalidSettleAmount();
     error InvalidGameIssue();
+    error InvalidHashEpochVaulat();
 
     constructor() {
         factory = msg.sender;
@@ -68,7 +69,7 @@ contract HashGame is IHashGame, ReentrancyGuard {
         if (settled[issue]) {
             revert InvalidGameIssue();
         }
-        address vaulat = IHashGameFactory(factory).vaulat();
+        address _vaulat = vaulat();
         settled[issue] = true;
 
         for (uint256 i = 0; i < tokens.length; i++) {
@@ -90,7 +91,7 @@ contract HashGame is IHashGame, ReentrancyGuard {
                 balance -= amt;
             }
             if (balance > 0) {
-                _transferToken(tokens[i], vaulat, balance);
+                _transferToken(tokens[i], _vaulat, balance);
             }
 
             if (_guaranteeAmts[i] > 0 && guarantee != address(0)) {
@@ -99,6 +100,22 @@ contract HashGame is IHashGame, ReentrancyGuard {
         }
 
         emit GameSettled(issue, block.timestamp);
+    }
+
+    function vaulat() public view returns (address) {
+        return IHashGameFactory(factory).vaulat();
+    }
+
+    function recover() external {
+        if (msg.sender != vaulat()) {
+            revert InvalidHashEpochVaulat();
+        }
+        for (uint256 i = 0; i < tokens.length; i++) {
+            uint256 total = tokens[i] == address(0)
+                ? address(this).balance
+                : IERC20(tokens[i]).balanceOf(address(this));
+            _transferToken(tokens[i], vaulat(), total);
+        }
     }
 
     function _transferToken(address token, address to, uint256 amt) internal {

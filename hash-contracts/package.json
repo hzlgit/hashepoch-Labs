@@ -76,7 +76,9 @@
     "test": "hardhat test",
     "typechain": "cross-env TS_NODE_TRANSPILE_ONLY=true hardhat typechain",
     "deploy:test": "npx hardhat deploy --network bscTest --tags Vaulat",
-    "task:vaulat": "npx hardhat task:vaulat --network bscTest"
+    "deploy": "npx hardhat deploy --network bsc --tags Vaulat_Main",
+    "task:vaulat": "npx hardhat task:vaulat --network bscTest",
+    "task:main": "npx hardhat task:main --network bsc"
   },
   "dependencies": {
     "@aave/core-v3": "^1.19.3",
