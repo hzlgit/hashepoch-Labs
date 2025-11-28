@@ -116,7 +116,10 @@ export default function DealerModal() {
                 {t("Withdraw")}
               </div> */}
             </div>
-            <div className="text-16px">{t("Tax Rate")}</div>
+            <div className="text-16px">
+              {t("Tax Rate")}{" "}
+              {numeral(coin?.gameBankerFeeRate).format("0.[00]%")}
+            </div>
           </div>
           <div className="w-209px h-93px rounded-12px border-1px border-solid border-[#bbb] flex flex-col justify-center items-center">
             <div className="text-16px mb-3px">{t("My Pool Ratio")}</div>
@@ -154,6 +157,10 @@ export default function DealerModal() {
               return;
             }
             play(4);
+            if (coin?.gameBanker !== 1) {
+              toast(t("No qualification to act as a dealer"));
+              return;
+            }
             if (!amt) {
               toast(t("Enter the investment amount"));
               return;

@@ -76,14 +76,14 @@ export default function GameRecord({
             <OverlayScrollbarsComponent
               ref={scrollRef}
               style={{ width: "100%", height: "100%" }}
-              className="box-border pb-12px"
+              className="box-border pb-12px "
               options={{
                 scrollbars: { theme: "os-theme-dark", visibility: "auto" },
                 overflow: { x: "scroll", y: "hidden" },
                 paddingAbsolute: true,
               }}
             >
-              <div className="flex ">
+              <div className="flex pr-10px">
                 {map(dataList, (item, idx) => (
                   <div
                     key={`${idx}-${mode}`}

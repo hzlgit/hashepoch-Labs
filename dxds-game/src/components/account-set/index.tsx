@@ -76,7 +76,7 @@ export default function AccountSet({
         />
         <img
           src="/images/jian.png"
-          className={`w-63px h-65px absolute left-2px top-2px cursor-pointer btn-press  ${
+          className={`w-63px h-65px absolute left-2px top-2px cursor-pointer btn-press ${
             Number(amount) <= 0 ? "cursor-no-drop" : ""
           }`}
           onClick={() => {

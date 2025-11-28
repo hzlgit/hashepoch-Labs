@@ -8,7 +8,6 @@ import CopyText from "../copy-button";
 import CloseOutline from "../icons/CloseOutline";
 import DealerModal from "../dealer-modal";
 import useTranslation from "@/locale";
-import toast from "react-hot-toast";
 import { find } from "lodash";
 import { useMemo } from "react";
 import useSound from "@/hooks/useSound";
@@ -113,19 +112,15 @@ export default function Marker({
         className="zuohuang w-118px h-88px flex flex-col items-center justify-center cursor-pointer"
         onClick={() => {
           play(0);
-          if (bankerData?.bankerCanBettCount > 0) {
-            modal.info({
-              icon: null,
-              footer: null,
-              centered: true,
-              closable: true,
-              maskClosable: true,
-              closeIcon: <CloseOutline onClick={() => play(0)} />,
-              content: <DealerModal />,
-            });
-          } else {
-            toast(t("No qualification to act as a dealer"));
-          }
+          modal.info({
+            icon: null,
+            footer: null,
+            centered: true,
+            closable: true,
+            maskClosable: true,
+            closeIcon: <CloseOutline onClick={() => play(0)} />,
+            content: <DealerModal />,
+          });
         }}
       >
         <div className="text-22px font-bold">{t("Banker")}</div>
