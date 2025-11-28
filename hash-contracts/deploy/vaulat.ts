@@ -4,18 +4,33 @@ import { DeployFunction } from "hardhat-deploy/types";
 import { HardhatRuntimeEnvironment } from "hardhat/types";
 
 const manager = "0xdd107da03a4ac10914eba256f8eaa32fc735003a";
-const factory = "0x6acCF37e002d55ECB6C59347D36df8f6871A548F";
+const factory = "0x08A5B6b8df1f2d927D2501a236b3963638b669d5";
 const vaulat = "0x714870047CAD91bdC8308Eb193Dc2B035d0453c9";
 const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   const { deployer } = await hre.getNamedAccounts();
   const { deploy } = hre.deployments;
   const [signer] = await hre.ethers.getSigners();
-  const usdt = await deploy("MockUSD", {
-    from: deployer,
-    args: [],
-    log: true,
-  });
+  // const usdt = await deploy("MockUSD", {
+  //   from: deployer,
+  //   args: [],
+  //   log: true,
+  // });
+  // const HEST = await deploy("MockHEST", {
+  //   from: deployer,
+  //   args: [],
+  //   log: true,
+  // });
 
+  // const HashStake = await deploy("HashStake", {
+  //   from: deployer,
+  //   args: [vaulat, "0xdd107da03a4ac10914eba256f8eaa32fc735003a"],
+  //   log: true,
+  // });
+  // const HashSubscribe = await deploy("HashSubscribe", {
+  //   from: deployer,
+  //   args: [usdt.address, vaulat],
+  //   log: true,
+  // });
   const HashVaulat = await hre.ethers.getContractFactory("HashVaulat", signer);
   console.log(deployer);
   const Vaulat = await upgrades.upgradeProxy(vaulat, HashVaulat, {});
@@ -31,9 +46,10 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
     log: true,
   });
 
-  const tx2 = await Vaulat.setAdmin(manager);
-  await tx2.wait();
+  // const tx2 = await Vaulat.setAdmin(manager);
+  // await tx2.wait();
   await Vaulat.setFactory(factory.address);
+  // await await Vaulat.setWhiteTarget(HashIDO.address, true);
 };
 export default func;
 func.id = "deploy_vaulat";

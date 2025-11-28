@@ -2,7 +2,7 @@ import { time } from "@nomicfoundation/hardhat-network-helpers";
 import { ZeroAddress } from "ethers";
 import { ethers } from "hardhat";
 
-import { HashGame, HashGameFactory, HashGameFactory__factory } from "../../types";
+import { HashGame, HashGameFactory, HashGameFactory__factory, HashIDO__factory } from "../../types";
 
 export async function deployLockFixture() {
   const [owner, otherAccount] = await ethers.getSigners();

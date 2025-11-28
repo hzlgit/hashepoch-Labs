@@ -78,7 +78,8 @@
     "deploy:test": "npx hardhat deploy --network bscTest --tags Vaulat",
     "deploy": "npx hardhat deploy --network bsc --tags Vaulat_Main",
     "task:vaulat": "npx hardhat task:vaulat --network bscTest",
-    "task:main": "npx hardhat task:main --network bsc"
+    "task:main": "npx hardhat task:main --network bsc",
+    "deploy:hest": "npx hardhat deploy --network bsc --tags HEST"
   },
   "dependencies": {
     "@aave/core-v3": "^1.19.3",

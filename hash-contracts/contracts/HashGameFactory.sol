@@ -5,6 +5,8 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "./interfaces/IHashGameFactory.sol";
 import "./interfaces/IHashGame.sol";
 import "./HashGame.sol";
+import "./interfaces/IHashGuarantee.sol";
+import "./HashGuarantee.sol";
 
 contract HashGameFactory is IHashGameFactory, Ownable {
     bytes32 public immutable INIT_CODE_GAME_HASH;
@@ -15,7 +17,7 @@ contract HashGameFactory is IHashGameFactory, Ownable {
     address public vaulat;
     address public admin;
 
-    event GameCreated(uint256 indexed gameNo, address indexed game, uint);
+    event GameCreated(uint256 indexed gameNo, address indexed game,address guarantee, uint);
 
     constructor(address _vaulat, address _owner, address _admin) Ownable(_owner) {
         vaulat = _vaulat;
@@ -31,7 +33,7 @@ contract HashGameFactory is IHashGameFactory, Ownable {
     function createGame(
         uint256 gameNo,
         address _manager,
-        address _guarantee,
+        bool _createGuarantee,
         address[] calldata _tokens,
         address[] calldata _accounts,
         uint256[] calldata _rates
@@ -40,15 +42,24 @@ contract HashGameFactory is IHashGameFactory, Ownable {
         require(getGame[gameNo] == address(0), "HashEpoch: GAME_EXISTS");
         bytes memory bytecode = type(HashGame).creationCode;
         bytes32 salt = keccak256(abi.encodePacked(gameNo));
-
+        address guarantee;
         assembly {
             game := create2(0, add(bytecode, 32), mload(bytecode), salt)
         }
-        IHashGame(game).initialize(_manager, _guarantee, _tokens, _accounts, _rates);
-
+        if(_createGuarantee) {
+            bytes memory bytecode2 = type(HashGuarantee).creationCode;
+            assembly {
+                guarantee := create2(0, add(bytecode2, 32), mload(bytecode2), salt)
+            }
+            IHashGame(game).initialize(_manager, guarantee, _tokens, _accounts, _rates);
+            IHashGuarantee(guarantee).initialize(_manager, game, _tokens);
+        } else {
+            IHashGame(game).initialize(_manager, guarantee, _tokens, _accounts, _rates);
+        }
+     
         getGame[gameNo] = game;
         allGames.push(game);
-        emit GameCreated(gameNo, game, allGames.length);
+        emit GameCreated(gameNo, game,guarantee, allGames.length);
     }
 
     function setAdmin(address _admin) external onlyOwner {

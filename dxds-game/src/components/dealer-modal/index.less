@@ -1,0 +1,96 @@
+.mtoken-item {
+  width: 185px;
+  height: 46px;
+  border-radius: 50px;
+  border: 1px solid #bbb;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px 0 44px;
+  position: relative;
+  cursor: pointer;
+  box-sizing: border-box;
+  font-size: 20px;
+  cursor: pointer;
+  color: #fff;
+  font-weight: bold;
+  font-size: 20px;
+
+  &.show-arrow {
+    padding-right: 8px;
+  }
+
+  .token-name {
+
+    text-align: center;
+    width: 100%;
+
+
+  }
+
+  &>img {
+    position: absolute;
+    left: 8px;
+
+  }
+
+  .arrow {
+    width: 30px;
+    height: 30px;
+  }
+
+  &.selected {
+    background: var(--vt-c-main1);
+    color: var(--vt-c-black-soft);
+    border: 1px solid var(--vt-c-main1);
+  }
+}
+
+.zz-input {
+  input {
+    width: 100%;
+    height: 50px;
+    border-radius: 12px;
+    background-color: var(--vt-c-black-65);
+    border: 1px solid var(--vt-c-border);
+    text-align: center;
+    font-size: 20px;
+    color: #fff;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+.sure-bg1 {
+
+  background-image: url(/images/sure-bg1.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  text-shadow: 0 2px 6px rgba(0, 203, 190, 1);
+}
+
+.modal-token-select-wrap {
+  background-color: rgba(57, 57, 57, 1);
+  border-radius: 24px;
+  border: 1px solid rgba(187, 187, 187, 0.84);
+  padding: 8px 0;
+  overflow: hidden;
+
+  &.record-dropdown {
+    border-radius: 6px;
+  }
+
+  .select-item {
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.65);
+    height: 40px;
+    padding: 0 10px;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.16);
+      color: #fff;
+    }
+  }
+}

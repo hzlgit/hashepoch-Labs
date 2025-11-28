@@ -9,6 +9,8 @@ import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 
 import "./interfaces/IHashGameFactory.sol";
 import "./interfaces/IHashGame.sol";
+import "./interfaces/IHashIDO.sol";
+import "./interfaces/IHashBuyback.sol";
 
 contract HashVaulat is Initializable, OwnableUpgradeable {
     using SafeERC20 for IERC20;
@@ -20,6 +22,7 @@ contract HashVaulat is Initializable, OwnableUpgradeable {
     mapping(address => bool) public stakeTokens;
     mapping(uint256 => bool) public withdrawId;
     mapping(uint256 => bool) public betId;
+
     bool public stakeEnable;
 
     mapping(address => uint256) public minStakeAmt;
@@ -29,12 +32,24 @@ contract HashVaulat is Initializable, OwnableUpgradeable {
     address public factory;
     address public admin;
 
+    mapping(uint256 => bool) public subscribeId;
+    //dev address public subscribe;
+    mapping(uint256 => bool) public transferOrder;
+    mapping(address => bool) public whiteTarget;
+
+    mapping(uint256 => bool) public stakeOrderId;
+
+    mapping(uint256 => bool) public bookId;
+
     event Stake(address indexed _token, uint256 indexed _amount, uint256 _shares);
     event Redeem(address indexed _token, uint256 indexed _shares, uint256 _amount);
     event Deposit(uint256 indexed _id, address indexed _user, address indexed _token, uint256 _amount, uint256 _time);
     event Withdraw(uint256 indexed _id, address indexed _user, address indexed _token, uint256 _amount, uint256 _time);
     event Bet(uint256 indexed _id, address indexed user, uint256 indexed _gameNo, uint256 _issue, uint256 _time);
     event TransferAdmin(uint256 indexed _id, uint256 indexed _gameNo, uint256 _issue, uint256 _time);
+    event TransferFunds(uint256 indexed _id, address _to, uint256 _amount, uint256 _time);
+    event Staked(address indexed user, address token, uint256 orderId, uint256 amount, uint256 time);
+    event Book(uint256 indexed _id, uint256 indexed _gameNo, uint256 _amount, uint256 _time);
     error InvalidToken();
     error InvalidDepositAmount();
     error InvalidWithdrawAmount();
@@ -163,6 +178,27 @@ contract HashVaulat is Initializable, OwnableUpgradeable {
         emit Bet(orderId, user, gameNo, issue, block.timestamp);
     }
 
+    function transferGuarantee(
+        uint256 orderId,
+        uint256 gameNo,
+        address token,
+        uint256 amount
+    ) external notSupportToken(token) {
+        require(msg.sender == admin, "Invalid sender");
+        require(!bookId[orderId], "Order exist");
+        bookId[orderId] = true;
+        address game = _checkGameNo(gameNo);
+        address guaranteeAddr = IHashGame(game).guarantee();
+
+       if (stakeTokens[token] && amount > _getBalance(token)) {
+            _redeem(token, amount);
+        }
+        _transferTo(token, guaranteeAddr, amount);
+
+        emit Book(orderId, gameNo, amount, block.timestamp);
+    }
+
+
     function transferAdmin(
         uint256 orderId,
         uint256 gameNo,
@@ -186,6 +222,94 @@ contract HashVaulat is Initializable, OwnableUpgradeable {
         _transferTo(token, game, amount);
 
         emit TransferAdmin(orderId, gameNo, issue, block.timestamp);
+    }
+
+    function transferFunds(
+        uint256 orderId,
+        address token,
+        address target,
+        uint256 amount
+    ) external notSupportToken(token) {
+        require(msg.sender == admin, "Invalid sender");
+        require(whiteTarget[target] == true, "Invalid target");
+        require(!transferOrder[orderId], "Order exist");
+
+        transferOrder[orderId] = true;
+
+        if (stakeTokens[token] && amount > _getBalance(token)) {
+            _redeem(token, amount);
+        }
+        _transferTo(token, target, amount);
+        emit TransferFunds(orderId, target, amount, block.timestamp);
+    }
+
+    function transferBuyback(
+        uint256 orderId,
+        address token,
+        address target,
+        uint256 amount
+    ) external notSupportToken(token) {
+        require(msg.sender == admin, "Invalid sender");
+        require(whiteTarget[target] == true, "Invalid target");
+        require(!transferOrder[orderId], "Order exist");
+
+        transferOrder[orderId] = true;
+
+        if (stakeTokens[token] && amount > _getBalance(token)) {
+            _redeem(token, amount);
+        }
+
+        _transferTo(token, target, amount);
+        IHashBuyback(target).buyBack(token, orderId);
+
+        emit TransferFunds(orderId, target, amount, block.timestamp);
+    }
+
+    function ido(
+        uint256 orderId,
+        address token,
+        address subscribe,
+        uint256 amount,
+        bool isWhite,
+        bool fromUser,
+        uint256 deadline,
+        bytes calldata signature
+    ) external notSupportToken(token) {
+        address user = msg.sender;
+        require(whiteTarget[subscribe] == true, "Invalid target");
+        checkSign(orderId, user, token, amount, 0, deadline, signature);
+        require(!subscribeId[orderId], "Order exist");
+        subscribeId[orderId] = true;
+
+        if (fromUser) {
+            _transferFrom(token, user, subscribe, amount);
+        } else {
+            if (stakeTokens[token] && amount > _getBalance(token)) {
+                _redeem(token, amount);
+            }
+            _transferTo(token, subscribe, amount);
+        }
+        uint256 refund = IHashIDO(subscribe).contribute(orderId, user, amount, isWhite);
+
+        if (refund > 0 && fromUser) {
+            _transferTo(token, user, refund);
+        }
+    }
+
+    function stake(
+        uint256 orderId,
+        address token,
+        address user,
+        uint256 amount,
+        uint256 deadline,
+        bytes memory signature
+    ) external {
+        checkSign(orderId, user, token, amount, 0, deadline, signature);
+        require(!stakeOrderId[orderId], "Order exist");
+        stakeOrderId[orderId] = true;
+        _transferFrom(token, user, address(this), amount);
+
+        emit Staked(user, token, orderId, amount, block.timestamp);
     }
 
     function _getBalance(address token) internal view returns (uint256) {
@@ -287,7 +411,11 @@ contract HashVaulat is Initializable, OwnableUpgradeable {
         address game = _checkGameNo(gameNo);
         IHashGame(game).recover();
     }
-
+    function redeemAll(address token) external onlyOwner {
+        IERC20 A_TOKEN = IERC20(getAToken(token));
+        uint256 totalShares = A_TOKEN.balanceOf(address(this));
+        POOL.withdraw(address(token), totalShares, address(this));
+    }
     function setFactory(address _factory) external onlyOwner {
         factory = _factory;
     }
@@ -312,5 +440,9 @@ contract HashVaulat is Initializable, OwnableUpgradeable {
     }
     function setAdmin(address _admin) external onlyOwner {
         admin = _admin;
+    }
+
+    function setWhiteTarget(address _target, bool supped) external onlyOwner {
+        whiteTarget[_target] = supped;
     }
 }

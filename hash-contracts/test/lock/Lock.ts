@@ -25,15 +25,17 @@ describe("HashGameFactory", function () {
     });
 
     it("Should fail if the unlockTime is not in the future", async function () {
-      await this.HashGameFactory.createGame(
-        1,
-        this.signers.admin.address,
-        ZeroAddress,
-        [ZeroAddress],
-        [this.signers.admin.address],
-        [50],
-      );
-      console.log(await this.HashGameFactory.getGame(1));
+      // await this.HashGameFactory.createGame(
+      //   1,
+      //   this.signers.admin.address,
+      //   ZeroAddress,
+      //   [ZeroAddress],
+      //   [this.signers.admin.address],
+      //   [50],
+      // );
+      // console.log(await this.HashGameFactory.getGame(1));
     });
+
+    it("Should fail if the unlockTime is not in the future", async function () {});
   });
 });

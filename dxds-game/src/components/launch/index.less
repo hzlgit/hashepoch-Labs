@@ -1,0 +1,60 @@
+.game-launch-screen {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  z-index: 99;
+  background: #171717;
+
+  .luanch-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    row-gap: 40px;
+
+    .launch-logo {
+      color: var(--primary-color);
+    }
+
+  }
+
+  .launch-progress-wrap {
+    width: 300px;
+    height: 30px;
+    border-radius: 30px;
+    border: 1px solid var(--primary-color);
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+
+    .launch-progress {
+      height: 30px;
+      position: absolute;
+      left: 0;
+      top: 0;
+      border-radius: 30px;
+      background: var(--primary-color);
+      transition: width .2s;
+
+    }
+
+    .progress-val {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 500;
+      color: #fff;
+      position: relative;
+      z-index: 2;
+      height: 100%;
+
+    }
+  }
+}

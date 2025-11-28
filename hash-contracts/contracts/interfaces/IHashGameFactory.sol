@@ -13,7 +13,7 @@ interface IHashGameFactory {
     function createGame(
         uint256 gameNo,
         address _manager,
-        address _guarantee,
+        bool createGuarantee,
         address[] calldata _tokens,
         address[] calldata _accounts,
         uint256[] calldata _rates

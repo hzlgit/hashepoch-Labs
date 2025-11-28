@@ -1,0 +1,27 @@
+.inputnum {
+  border: none;
+  box-sizing: border-box;
+  font-size: 28px;
+  background: transparent;
+  outline: none;
+  color: var(--vt-c-main1);
+  font-weight: bold;
+  text-align: right;
+  width: 120px;
+  transform: translateX(-50%);
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.btn-press {
+  transition: transform .3s ease-in-out;
+  cursor: pointer;
+
+  &:active:not(.cursor-no-drop) {
+    transform: scale(0.9);
+  }
+}

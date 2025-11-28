@@ -1,0 +1,172 @@
+.game-token-list {
+
+
+  .game-token-list__tokens {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    // gap: 24px;
+    width: 100%;
+    width: 564px;
+    padding-top: 2.3px;
+  }
+
+  .token-item {
+    width: 177px;
+    height: 56px;
+
+    cursor: pointer;
+    color: var(--vt-c-black-soft);
+    font-size: 22px;
+    font-weight: bold;
+    position: relative;
+    border: none;
+
+
+    .token-item__content {
+      width: 100%;
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      gap: 6px;
+      padding: 0 10px;
+      box-sizing: border-box;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+
+      .token-name {
+        flex: 1;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        text-align: center;
+      }
+    }
+
+    &::before {
+      position: absolute;
+      content: "";
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      transition: opacity .3s;
+      opacity: 1;
+      background-image: url(/images/btn-bg.png);
+      background-size: 100% 100%;
+    }
+
+    &::after {
+      position: absolute;
+      content: "";
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      background-image: url(/images/btn-active-bg.png);
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+      transition: opacity .3s;
+      opacity: 0;
+    }
+
+    &.selected {
+      text-shadow: 0px 2px 6px #00CBBE;
+      color: #fff;
+
+      &::before {
+        opacity: 0;
+      }
+
+      &::after {
+        opacity: 1;
+      }
+
+      .arrow {
+        color: #fff;
+      }
+
+    }
+
+    // &.HEST {
+    //   &::before {
+    //     background: url(/images/btn-HEST.png) no-repeat;
+    //     background-size: 100% 100%;
+    //   }
+
+    // }
+
+    // &.USDT {
+    //   &::before {
+    //     background: url(/images/btn-USDT.png) no-repeat;
+    //     background-size: 100% 100%;
+    //   }
+    // }
+
+    // &.USDC {
+    //   &::before {
+    //     background: url(/images/btn-USDC.png) no-repeat;
+    //     background-size: 100% 100%;
+    //   }
+    // }
+
+    .logo {
+      width: 30px;
+      height: 30px;
+      border: 1px solid #fff;
+      border-radius: 50%;
+    }
+
+    .arrow {
+      width: 40px;
+      height: 40px;
+      margin-right: 10px;
+      color: var(--vt-c-black-soft);
+      position: relative;
+      z-index: 2;
+    }
+  }
+}
+
+
+.token-select-wrap {
+  background-image: url(/images/select-bg.png);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+
+  max-height: 280px;
+  border-radius: 8px;
+  overflow: hidden;
+
+  .select-item {
+    height: 51px;
+    font-size: 20px;
+    text-align: center;
+    color: rgba(34, 34, 34, 0.66);
+    cursor: pointer;
+    padding: 0 16px;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.13);
+      color: var(--vt-c-black-soft);
+    }
+  }
+}
+
+@media (max-width:974px) {
+  .game-token-list {
+    .game-token-list__tokens {
+      width: 568px;
+      padding-left: 3px;
+
+      .token-item {
+        width: 178px;
+      }
+    }
+  }
+}

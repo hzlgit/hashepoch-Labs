@@ -1,0 +1,112 @@
+ .touzhu1,
+ .touzhu2 {
+   width: 379px;
+   height: 214px;
+   background-size: 100% 100%;
+   background-repeat: no-repeat;
+   cursor: pointer;
+   display: flex;
+   box-sizing: border-box;
+ }
+
+ .touzhu1 {
+
+   padding-left: 75px;
+
+   &::before {
+     position: absolute;
+     left: 0;
+     right: 0;
+     top: 0;
+     bottom: 0;
+     content: "";
+     background-image: url(/images/touzhu-bg1-default.png);
+     background-size: 100% 100%;
+     background-repeat: no-repeat;
+     opacity: 1;
+     transition: opacity .3s;
+   }
+
+   &::after {
+     position: absolute;
+     left: 0;
+     right: 0;
+     top: 0;
+     bottom: 0;
+     content: "";
+     background-image: url(/images/touzhu1-bg.png);
+     background-size: 100% 100%;
+     background-repeat: no-repeat;
+     opacity: 0;
+     transition: opacity .3s;
+   }
+
+   &.bet-2 {
+     &::after {
+       background-image: url(/images/touzhu1-bg_2.png);
+       background-size: 100% 100%;
+     }
+   }
+
+   &.big-bg {
+     &::before {
+       opacity: 0;
+     }
+
+     &::after {
+       opacity: 1;
+     }
+   }
+
+ }
+
+ .touzhu2 {
+
+   padding-left: 165px;
+   position: relative;
+
+   &::before {
+     position: absolute;
+     left: 0;
+     right: 0;
+     top: 0;
+     bottom: 0;
+     content: "";
+     background-image: url(/images/touzhu-bg2-default.png);
+     background-size: 100% 100%;
+     background-repeat: no-repeat;
+     opacity: 1;
+     transition: opacity .3s;
+   }
+
+   &::after {
+     position: absolute;
+     left: 0;
+     right: 0;
+     top: 0;
+     bottom: 0;
+     content: "";
+     background-image: url(/images/touzhu2-bg.png);
+     background-size: 100% 100%;
+     background-repeat: no-repeat;
+     opacity: 0;
+     transition: opacity .3s;
+   }
+
+   &.bet-2 {
+     &::after {
+       background-image: url(/images/touzhu2-bg_2.png);
+       background-size: 100% 100%;
+     }
+   }
+
+   &.small-bg {
+     &::before {
+       opacity: 0;
+     }
+
+     &::after {
+       opacity: 1;
+     }
+   }
+ }

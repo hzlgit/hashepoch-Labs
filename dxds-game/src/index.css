@@ -1,0 +1,144 @@
+:root:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --primary-color: #00ffef;
+  --vt-c-main1: #00ffef;
+  --vt-c-main2: #ff00d7;
+  --vt-c-main3: #ffdf00;
+  --vt-c-main4: #00e2d4;
+  --vt-c-main-border6: rgba(239, 186, 52, 0.6);
+  --vt-c-white: #fff;
+  --vt-c-white-1: rgba(255, 255, 255, 0.1);
+  --vt-c-white-47: rgba(255, 255, 255, 0.47);
+  --vt-c-white-5: rgba(255, 255, 255, 0.5);
+  --vt-c-white-6: rgba(255, 255, 255, 0.6);
+  --vt-c-white-65: rgba(255, 255, 255, 0.65);
+  --vt-c-white-7: rgba(255, 255, 255, 0.7);
+  --vt-c-white-75: rgba(255, 255, 255, 0.75);
+  --vt-c-white-8: rgba(255, 255, 255, 0.8);
+  --vt-c-black-43: rgba(0, 0, 0, 0.43);
+  --vt-c-black-45: rgba(0, 0, 0, 0.45);
+  --vt-c-black-5: rgba(0, 0, 0, 0.5);
+  --vt-c-black-6: rgba(0, 0, 0, 0.6);
+  --vt-c-black-65: rgba(0, 0, 0, 0.65);
+  --vt-c-black-7: rgba(0, 0, 0, 0.7);
+  --vt-c-black-75: rgba(0, 0, 0, 0.75);
+  --vt-c-black-8: rgba(0, 0, 0, 0.8);
+  --vt-c-E523: rgba(229, 229, 229, 0.23);
+
+  --vt-c-black: #000;
+  --vt-c-black-soft: #101010;
+  --vt-c-black-mute: #313131;
+  --vt-c-black-333: #333;
+  --vt-c-black-363636: #333;
+  --vt-c-nav: rgba(86, 86, 86, 0.5);
+  --vt-c-border: #bbb;
+  --vt-c-gradient: linear-gradient(
+    160.48deg,
+    rgba(203, 159, 46, 0.46) 0.64%,
+    rgba(134, 108, 21, 0) 130.29%
+  );
+
+  --vt-c-indigo: #fff;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  position: absolute;
+  background-color: #000;
+}
+
+/*定义滚动条轨道 内阴影+圆角*/
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/*定义滑块 内阴影+圆角*/
+::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  width: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: rgba(255, 255, 255, 0.22);
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: #171717;
+  font-size: 16px;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #fff;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.kaijiang {
+  animation: xuanzhuan 3s linear infinite;
+}
+
+.animate {
+  animation: heart 2s infinite;
+}
+
+.animate1 {
+  animation: heart 1s infinite;
+}
+
+.digit-container1 {
+  animation: verticalY 3s linear;
+}
+
+@keyframes heart {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes arrowAnimate {
+  from {
+    transform: translateX(0px);
+  }
+
+  to {
+    transform: translateX(-100px);
+  }
+}
+
+@keyframes xuanzhuan {
+  from {
+    transform: rotate(0);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes verticalY {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(108px);
+  }
+}

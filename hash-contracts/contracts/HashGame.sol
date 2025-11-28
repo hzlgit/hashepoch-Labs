@@ -26,6 +26,7 @@ contract HashGame is IHashGame, ReentrancyGuard {
     address public guarantee;
 
     mapping(uint256 => bool) public settled;
+    mapping(uint256 => bool) public settleAwardCheck;
 
     modifier onlyManager() {
         _checkManager();
@@ -33,6 +34,7 @@ contract HashGame is IHashGame, ReentrancyGuard {
     }
 
     event GameSettled(uint256 indexed issue, uint);
+    event GameSettledAward(uint256 indexed issue, uint);
     error InvalidSettleAmount();
     error InvalidGameIssue();
     error InvalidHashEpochVaulat();
@@ -93,13 +95,71 @@ contract HashGame is IHashGame, ReentrancyGuard {
             if (balance > 0) {
                 _transferToken(tokens[i], _vaulat, balance);
             }
-
             if (_guaranteeAmts[i] > 0 && guarantee != address(0)) {
                 _transferToken(tokens[i], guarantee, _guaranteeAmts[i]);
             }
         }
-
         emit GameSettled(issue, block.timestamp);
+    }
+
+    function settlev2(
+        uint256 issue,
+        uint256[] calldata _guaranteeAmts,
+        uint256[] calldata _amts,
+        uint256[] calldata _amts2
+    ) external nonReentrant onlyManager {
+        if (settled[issue]) {
+            revert InvalidGameIssue();
+        }
+        address _vaulat = vaulat();
+        settled[issue] = true;
+
+        for (uint256 i = 0; i < tokens.length; i++) {
+            uint256 total = tokens[i] == address(0)
+                ? address(this).balance
+                : IERC20(tokens[i]).balanceOf(address(this));
+
+            uint256 settleAmt = _amts[i];
+            if (settleAmt > total) {
+                revert InvalidSettleAmount();
+            }
+            if (total <= 0 || settleAmt <= 0) {
+                continue;
+            }
+            uint256 balance = settleAmt;
+             if(_amts2[i] > 0 &&  accounts[0] != address(0)) {
+                balance -= _amts2[i];
+                _transferToken(tokens[i], accounts[0], _amts2[i]);
+             }
+            if (balance > 0) {
+                _transferToken(tokens[i], _vaulat, balance);
+            }
+            if (_guaranteeAmts[i] > 0 && guarantee != address(0)) {
+                _transferToken(tokens[i], guarantee, _guaranteeAmts[i]);
+            }
+        }
+        emit GameSettled(issue, block.timestamp);
+    }
+    function settleAward(
+        uint256 issue,
+        address[] calldata _addrs,
+        uint8[] calldata _tokenType,
+        uint256[] calldata _amts
+    ) external nonReentrant onlyManager {
+        if (!settled[issue] || settleAwardCheck[issue]) {
+            revert InvalidGameIssue();
+        }
+        settleAwardCheck[issue] = true;
+
+        for (uint256 i = 0; i < _addrs.length; i++) {
+            address token = tokens[_tokenType[i]];
+            _transferToken(token, _addrs[i], _amts[i]);
+        }
+        emit GameSettledAward(issue, block.timestamp);
+    }
+
+    function setTokens(address [] calldata _tokens) external nonReentrant onlyManager{
+      tokens = _tokens;
     }
 
     function vaulat() public view returns (address) {
