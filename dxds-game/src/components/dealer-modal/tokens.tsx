@@ -6,6 +6,7 @@ import ArrowDownIcon from "../icons/ArrowDown";
 import { findIndex, slice } from "lodash";
 import { useMemo, useState } from "react";
 import useSound from "@/hooks/useSound";
+import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
 
 export default function TokenList({
   list,
@@ -58,27 +59,36 @@ export default function TokenList({
         open={open}
         onOpenChange={setOpen}
         popupRender={() => (
-          <div>
-            {slice(list, 2).map((item, key) => (
-              <div
-                key={key}
-                className="flex items-center gap-16px select-item"
-                onClick={() => {
-                  onChange?.(item);
-                  setOpen(false);
-                  play(0);
-                }}
-              >
-                <img
-                  src={item.tokenLogo}
-                  alt=""
-                  className="w-30px h-30px rounded-100% "
-                />
-                <div className="text-18px font-bold text">
-                  {item.tokenSymbol}
+          <div className="min-w-120px">
+            <OverlayScrollbarsComponent
+              className=" max-h-260px"
+              options={{
+                scrollbars: { theme: "os-theme-dark", visibility: "auto" },
+                overflow: { x: "hidden", y: "scroll" },
+                paddingAbsolute: true,
+              }}
+            >
+              {slice(list, 2).map((item, key) => (
+                <div
+                  key={key}
+                  className="flex items-center gap-16px select-item"
+                  onClick={() => {
+                    onChange?.(item);
+                    setOpen(false);
+                    play(0);
+                  }}
+                >
+                  <img
+                    src={item.tokenLogo}
+                    alt=""
+                    className="w-30px h-30px rounded-100% "
+                  />
+                  <div className="text-18px font-bold text">
+                    {item.tokenSymbol}
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </OverlayScrollbarsComponent>
           </div>
         )}
       >

@@ -4,6 +4,7 @@ import ArrowDownIcon from "../icons/ArrowDown";
 import { map } from "lodash";
 import { useState } from "react";
 import useSound from "@/hooks/useSound";
+import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
 
 export default function TokenList({
   list,
@@ -34,22 +35,31 @@ export default function TokenList({
         placement="bottomRight"
         onOpenChange={setOpen}
         popupRender={() => (
-          <div className="min-w-120px">
-            {map(list, (item, key) => (
-              <div
-                key={key}
-                className="flex items-center gap-16px select-item"
-                onClick={() => {
-                  onChange?.(item);
-                  setOpen(false);
-                  play(0);
-                }}
-              >
-                <div className="text-18px font-bold text">
-                  {item.tokenSymbol}
+          <div className="min-w-120px ">
+            <OverlayScrollbarsComponent
+              className=" max-h-260px "
+              options={{
+                scrollbars: { theme: "os-theme-dark", visibility: "auto" },
+                overflow: { x: "hidden", y: "scroll" },
+                paddingAbsolute: true,
+              }}
+            >
+              {map(list, (item, key) => (
+                <div
+                  key={key}
+                  className="flex items-center gap-16px select-item"
+                  onClick={() => {
+                    onChange?.(item);
+                    setOpen(false);
+                    play(0);
+                  }}
+                >
+                  <div className="text-18px font-bold text">
+                    {item.tokenSymbol}
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </OverlayScrollbarsComponent>
           </div>
         )}
       >
