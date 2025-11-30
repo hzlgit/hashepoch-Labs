@@ -88,11 +88,11 @@ body {
 }
 
 .animate {
-  animation: heart 2s infinite;
+  animation: heart 1s infinite;
 }
 
 .animate1 {
-  animation: heart 1s infinite;
+  animation: heart 2s infinite;
 }
 
 .digit-container1 {

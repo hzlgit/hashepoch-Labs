@@ -230,6 +230,13 @@
 
 }
 
+.mode1-theme {
+  --theme-color: #00FFEF;
+}
+
+.mode2-theme {
+  --theme-color: #FF00D7;
+}
 
 @media (max-width:974px) {
   .game-home-view {
@@ -331,7 +338,7 @@
   transition: transform 2s ease-in-out;
   transform: translateY(0);
   width: 100%;
-
+  height: 36px;
 
   .digit {
     display: flex;
@@ -341,10 +348,18 @@
     transition: background .3s;
 
     &.active {
-      background-color: #FF00D7;
+      color: #000;
+      background-color: rgba(255, 255, 255, 1);
       box-shadow: 0px 0px 12px 0px rgba(255, 0, 215, 0.52);
     }
+
+    &.active1 {
+      background-color: var(--theme-color) !important;
+      box-shadow: 0px 0px 12px 0px rgba(255, 0, 215, 0.52);
+    }
+
   }
+
 
 }
 
@@ -353,18 +368,26 @@
   width: 101px;
   height: 65px;
   border-radius: 12px;
-  color: rgba(0, 255, 239, 1);
+  color: #fff;
   font-size: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(0, 255, 239, 1);
+  border: 1px solid #fff;
   transition: background .3s, border .3s, color .3s;
 
 }
 
-.winner-result.active {
-  background-color: rgba(255, 0, 215, 1);
-  border: 1px solid rgba(255, 0, 215, 1);
+.winner-result {
   color: #fff;
+
+  &.mode1.active {
+    background-color: rgba(0, 255, 239, 1);
+    border: 1px solid rgba(0, 255, 239, 1);
+  }
+
+  &.mode2.active {
+    background-color: rgba(255, 0, 215, 1);
+    border: 1px solid rgba(255, 0, 215, 1);
+  }
 }
