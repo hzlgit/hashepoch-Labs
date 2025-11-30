@@ -75,7 +75,7 @@ export default function HomeView() {
   const { data: bankerData } = useBankerData(coin?.assetType);
 
   useEffect(() => {
-    if (config?.assetConfig?.length > 0) {
+    if (config?.assetConfig?.length > 0 && !coin?.assetType) {
       setCoin(config?.assetConfig?.[0]);
     }
   }, [config]);
