@@ -32,16 +32,16 @@ export default function AccountSet({
             onChangePayType?.();
           }}
         />
-        <div className="w-128px md:w-108px h-65px overflow-hidden flex items-center relative">
+        <div className="w-108px h-65px overflow-hidden flex items-center relative">
           <div
-            className={`w-258px moshi absolute left-0 flex color-#00FFEF font-bold ${
+            className={`w-220px moshi absolute left-0 flex color-#00FFEF font-bold ${
               payType === 2 ? "newClass1" : "newClass2"
             }`}
           >
-            <div className="text-24px md:w-130px flex items-center justify-center ">
+            <div className="text-24px w-130px flex items-center justify-center ">
               {t("Wallet")}
             </div>
-            <div className="text-24px md:w-130px flex items-center justify-center">
+            <div className="text-24px w-130px flex items-center justify-center">
               {t("Account")}
             </div>
           </div>
@@ -52,7 +52,7 @@ export default function AccountSet({
           )}
         >
           <div className="flex items-center cursor-pointer">
-            <HelpOutline className="w-32px h-32px md:w-24px md:h-24px" />
+            <HelpOutline className="w-24px h-24px" />
           </div>
         </Tooltip>
         <img

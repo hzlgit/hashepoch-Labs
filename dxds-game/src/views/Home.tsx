@@ -41,7 +41,7 @@ export default function HomeView() {
     changeModalOpend,
     setOpenPeriod,
   } = useAppStateStore();
-  const { data: config } = useGameData();
+  const { data: config, refetch: refetchGameConfig } = useGameData();
 
   const [mode, setMode] = useState(1);
   const [size, setSize] = useState<number>();
@@ -75,10 +75,10 @@ export default function HomeView() {
   const { data: bankerData } = useBankerData(coin?.assetType);
 
   useEffect(() => {
-    if (config?.assetConfig?.length > 0) {
+    if (config?.assetConfig?.length > 0 && !coin?.assetType) {
       setCoin(config?.assetConfig?.[0]);
     }
-  }, [config, coin]);
+  }, [config]);
 
   useEffect(() => {
     if (coin) {
@@ -93,6 +93,7 @@ export default function HomeView() {
         setPreviousPeriod(current?.previousPeriod);
         refetchUserData();
         refetchDrawData();
+        refetchGameConfig();
         recordRef.current?.refetch();
       }
     }
@@ -102,6 +103,7 @@ export default function HomeView() {
     refetchUserData,
     setPreviousPeriod,
     refetchDrawData,
+    refetchGameConfig,
   ]);
 
   useEffect(() => {
@@ -246,9 +248,9 @@ export default function HomeView() {
 
   return (
     <div
-      className={`game-home-view ${mode === 2 ? "mode2" : ""} ${
-        loadEnd ? "visible-view" : ""
-      }`}
+      className={`game-home-view mode${mode}-theme ${
+        mode === 2 ? "mode2" : ""
+      } ${loadEnd ? "visible-view" : ""}`}
     >
       <div className="main-box">
         <Header />
@@ -281,7 +283,7 @@ export default function HomeView() {
           </div>
         </div>
         <div className="bg2">
-          <div className="w-100% flex justify-between mt-20px md:mt-17px mb-51px">
+          <div className="w-100% flex justify-between mt-17px mb-51px">
             <div
               className={`style-btn style-btn1 ${mode === 1 ? "show" : ""}`}
               onClick={() => {

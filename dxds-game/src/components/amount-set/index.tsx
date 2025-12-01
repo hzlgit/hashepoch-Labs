@@ -20,7 +20,7 @@ export default function AmountSet({
       {map(coin?.bettAmountConfig ?? [1], (item, idx) => (
         <div
           key={idx}
-          className={`amount-item text-20px ${
+          className={`amount-item ${
             mode == 1 ? "amount-item1" : mode == 2 ? "amount-item2" : ""
           } ${item == amt ? "actived" : ""}`}
           onClick={() => {
