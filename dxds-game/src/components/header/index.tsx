@@ -22,8 +22,8 @@ export default function Header() {
         className="absolute settings cursor-pointer"
         onClick={() => sdk.call("back", {})}
       >
-        {/* <Settings className={`w-24px h-24px color-#000 `} /> */}
-        <CloseOutline className={`w-24px h-24px color-#000 `}></CloseOutline>
+        {/* <Settings className={`w-28px h-28px md:w-24px md:h-24px color-#000 `} /> */}
+        <CloseOutline className={`w-28px h-28px md:w-24px md:h-24px color-#000 `}></CloseOutline>
       </div>
       <div
         className="absolute volume cursor-pointer"
@@ -33,7 +33,7 @@ export default function Header() {
         }}
       >
         <Volume
-          className={`w-24px h-24px color-#000 ${mute ? "mute" : "open"}`}
+          className={`w-28px h-28px md:w-24px md:h-24px color-#000 ${mute ? "mute" : "open"}`}
         />
       </div>
       <div
@@ -51,7 +51,7 @@ export default function Header() {
           });
         }}
       >
-        <Help className="w-24px h-24px color-#000" />
+        <Help className="w-28px h-28px md:w-24px md:h-24px color-#000" />
       </div>
       <div className="token-select">{t("Token Selection")}</div>
       <div className="token-select token-select1 opacity-0 lg:opacity-100">
