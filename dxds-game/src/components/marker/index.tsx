@@ -29,11 +29,11 @@ export default function Marker({
     return amt;
   }, [data?.assetConfig, symbol]);
   return (
-    <div className="w-100% flex justify-betweeen items-center mt-50px pl-35px py-22px pr-0 box-border">
+    <div className="w-100% flex justify-betweeen items-center mt-50px pl-35px py-15px pr-0 box-border">
       <div className="flex flex-1 items-center">
         <div className="w-100% flex">
           <div className="flex-1">
-            <div className="text-14px mb-4px color-[var(--vt-c-white-75)]">
+            <div className="text-14px lg:mb-4px color-[var(--vt-c-white-75)]">
               {t("Total Margin")}
             </div>
             <div className="text-24px font-bold py-5px flex items-center">
@@ -62,15 +62,15 @@ export default function Marker({
             <div className="text-14px color-[var(--vt-c-white-75)] flex items-center">
               <span
                 className="mr-7px max-w-180px overflow-hidden ws-nowrap"
-                style={{ textOverflow: "ellipsis" }}
+                // style={{ textOverflow: "ellipsis" }}
               >
-                {formatAccount(data?.gameInfo?.guardWalletAddress, 4, 10)}
+                {formatAccount(data?.gameInfo?.guardWalletAddress, 4, 6)}
               </span>
               <CopyText text={data?.gameInfo?.guardWalletAddress} />
             </div>
           </div>
           <div className="flex-1">
-            <div className="text-14px mb-4px color-[var(--vt-c-white-75)]">
+            <div className="text-14px lg:mb-4px color-[var(--vt-c-white-75)]">
               {t("Current Margin")}
             </div>
             <div className="text-24px font-bold py-5px flex items-center">
@@ -99,9 +99,9 @@ export default function Marker({
             <div className="text-14px color-[var(--vt-c-white-75)] flex items-center">
               <span
                 className="mr-7px max-w-180px overflow-hidden ws-nowrap"
-                style={{ textOverflow: "ellipsis" }}
+                // style={{ textOverflow: "ellipsis" }}
               >
-                {formatAccount(data?.gameInfo?.guardContractAddress, 4, 10)}
+                {formatAccount(data?.gameInfo?.guardContractAddress, 4, 6)}
               </span>
               <CopyText text={data?.gameInfo?.guardContractAddress} />
             </div>

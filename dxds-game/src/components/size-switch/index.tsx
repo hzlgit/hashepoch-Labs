@@ -52,7 +52,7 @@ export default function SizeSwitch({
       <div className="w-166px h-196px absolute top-30px left-343px z-2">
         <img
           src="/images/qk-bg.png"
-          className="w-166px h-196px absolute top-0 left-0 z-1 animate1"
+          className="w-166px h-196px absolute top-0 left-0 z-1 animate"
         />
         <div className="w-166px h-196px absolute top-0 left-0 z-2">
           <div className="w-100% h-100% flex flex-col items-center justify-center">
@@ -69,7 +69,7 @@ export default function SizeSwitch({
       </div>
       <img
         src="/images/touzhu-cai.png"
-        className="w-720px h-214px absolute top-68px left-50px z-1 animate1"
+        className="w-720px h-214px absolute top-68px left-50px z-1 animate"
       />
       <div
         className={`relative z-2 touzhu2 bet-${mode} ${
@@ -90,7 +90,7 @@ export default function SizeSwitch({
           </div>
           <div className="text-16px mb-5px">
             {t("Volume")}{" "}
-            {numeral(data?.bettData?.[2]?.totalBetAmount).format("0,0.00")}
+            {numeral(data?.bettData?.[2]?.totalUserCount).format("0,0.00")}
           </div>
           <div className="text-16px mb-5px">
             {t("Odds")} 1 : {conf?.[mode]?.[2]}

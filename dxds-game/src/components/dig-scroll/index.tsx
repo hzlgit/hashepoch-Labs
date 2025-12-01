@@ -14,7 +14,7 @@ const CONFIG = {
   DURATION: 2000,
   ROLL_COUNT: 2,
   DELAY_BETWEEN_DIGITS: 35,
-  DIGIT_HEIGHT: 36,
+  DIGIT_HEIGHT: 50,
 
   ROLL_SPEED: 0.1, // 滚动速度（每帧滚动的距离）
 };
