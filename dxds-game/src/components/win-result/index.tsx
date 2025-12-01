@@ -25,7 +25,7 @@ export default function WinResult({ mode, data }: { mode: number; data: any }) {
       formatAccount(
         data?.blockHash ?? "0x000000000000000000000000000000",
         4,
-        10
+        8
       ),
     [data?.blockHash]
   );
@@ -34,7 +34,7 @@ export default function WinResult({ mode, data }: { mode: number; data: any }) {
   const { play } = useSound();
   return (
     <>
-      <div className="win-result-container w-100% h-142px px-20px pt-15px flex justify-between relative box-border">
+      <div className="win-result-container w-100% h-142px px-10px md:px-20px py-15px flex justify-between relative box-border">
         <img
           src="/images/kj-blue.png"
           alt=""
@@ -51,13 +51,14 @@ export default function WinResult({ mode, data }: { mode: number; data: any }) {
         />
         <div>
           <div className="text-14px mb-16px">{t("Previous Draw")}</div>
-          <div className="text-18px mb-19px font-bold">
+          <div className="text-18px mb-16px lg:mb-19px font-bold">
             #{data?.periodNo ?? "00000000"}
           </div>
           <div
             className="relative z-2
       cursor-pointer
-      w-52px h-20px line-height-20px
+      w-80px lg:w-52px h-30px lg:h-20px 
+      flex items-center justify-center
       rounded-6px color-[var(--vt-c-white-5)]
       border-1px border-solid 
       border-[var(--vt-c-white-5)] 
@@ -84,14 +85,14 @@ export default function WinResult({ mode, data }: { mode: number; data: any }) {
             <span className="color-[var(--theme-color)]">{t("Hash")}</span>
           </div>
 
-          <div className="counter-container flex">
+          <div className="counter-container counter-container2 flex">
             <div className="flex">
               {characters.map((char, index) => (
                 <DigitScroller
                   key={index}
                   targetChar={char}
                   index={index}
-                  isActive={index === 18 - data?.gameNumberPos}
+                  isActive={index === 16 - data?.gameNumberPos}
                 />
               ))}
             </div>
@@ -99,11 +100,11 @@ export default function WinResult({ mode, data }: { mode: number; data: any }) {
         </div>
         <div className="text-right">
           <div className="text-14px mb-16px">{t("Block Height")}</div>
-          <div className="text-18px mb-20px font-bold">
+          <div className="text-18px mb-16px lg:mb-19px font-bold">
             {data?.blockNumber ?? "000000"}
           </div>
           <div className="color-[var(--vt-c-white-5)] text-12px">
-            {t("Ethereum Block")}
+            {t("Ethereum")}
           </div>
         </div>
       </div>
@@ -218,7 +219,7 @@ export const DigitScroller = ({
         {characterSequence.map((char, idx) => (
           <div
             key={idx}
-            className={`digit  ${actived && isActive ? "active1" : ""}`}
+            className={`digit ${actived && isActive ? "active1" : ""}`}
             style={{
               transition: "all 0.3s ease",
             }}

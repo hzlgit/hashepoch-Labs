@@ -43,25 +43,25 @@ export default function GameRecord({
               alt=""
             />
             <div className="flex items-center">
-              <div className="w-26px h-26px flex items-center justify-center rounded-100% bg-[var(--vt-c-main4)] text-16px mr-10px text-center  mr-14px">
+              <div className="w-32px md:w-26px h-32px md:h-26px rounded-100% bg-[var(--vt-c-main4)] text-16px mr-10px text-center flex items-center justify-center mr-14px">
                 {t("B")}
               </div>
               <div className="text-16px mr-33px">
                 {numeral(data?.statistics?.bigCount).format("00")}
               </div>
-              <div className="w-26px h-26px flex items-center justify-center rounded-100% bg-[var(--vt-c-main2)] text-16px mr-10px text-center mr-14px">
+              <div className="w-32px md:w-26px h-32px md:h-26px rounded-100% bg-[var(--vt-c-main2)] text-16px mr-10px text-center flex items-center justify-center mr-14px">
                 {t("S")}
               </div>
               <div className="text-16px mr-37px">
                 {numeral(data?.statistics?.smallCount).format("00")}
               </div>
-              <div className="w-26px h-26px flex items-center justify-center rounded-100% bg-[var(--vt-c-main4)] text-16px mr-10px text-center mr-14px">
+              <div className="w-32px md:w-26px h-32px md:h-26px rounded-100% bg-[var(--vt-c-main4)] text-16px mr-10px text-center flex items-center justify-center mr-14px">
                 {t("O")}
               </div>
               <div className="text-16px mr-33px">
                 {numeral(data?.statistics?.oddCount).format("00")}
               </div>
-              <div className="w-26px h-26px flex items-center justify-center rounded-100% bg-[var(--vt-c-main2)] text-16px mr-10px text-center mr-14px">
+              <div className="w-32px md:w-26px h-32px md:h-26px rounded-100% bg-[var(--vt-c-main2)] text-16px mr-10px text-center flex items-center justify-center mr-14px">
                 {t("E")}
               </div>
               <div className="text-16px mr-37px">
@@ -72,11 +72,11 @@ export default function GameRecord({
           </div>
         </div>
         <div className="pl-36px pr-25px">
-          <div className="mt-47px font-bold h-230px box-border pr-12px">
+          <div className="mt-40px font-bold h-235px box-border pr-12px ">
             <OverlayScrollbarsComponent
               ref={scrollRef}
               style={{ width: "100%", height: "100%" }}
-              className="box-border pb-12px"
+              className="box-border pb-12px "
               options={{
                 scrollbars: { theme: "os-theme-dark", visibility: "auto" },
                 overflow: { x: "scroll", y: "hidden" },
@@ -94,7 +94,7 @@ export default function GameRecord({
                     {times(item.count).map((key) => (
                       <div
                         key={key}
-                        className={`w-32px h-32px rounded-100% flex items-center justify-center bg-[${
+                        className={`w-36px h-36px md:w-32px md:h-32px rounded-100% flex items-center justify-center bg-[${
                           item.type === 2
                             ? "var(--vt-c-main2)"
                             : "var(--vt-c-main4)"

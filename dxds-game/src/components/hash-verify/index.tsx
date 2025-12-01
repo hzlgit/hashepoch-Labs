@@ -142,7 +142,7 @@ export default function VerifyModal({ onClose }: { onClose: () => void }) {
               play(0);
             }}
           >
-            <ArrowLeftIcon className="w-24px h-24px" />{" "}
+            <ArrowLeftIcon className="w-32px h-32px md:w-24px md:h-24px" />{" "}
             {t("Game Verification Ledger")}
           </div>
           <div className="search-input w-274px">

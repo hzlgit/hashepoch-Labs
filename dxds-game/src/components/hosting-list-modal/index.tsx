@@ -84,7 +84,7 @@ export default function HostingListModal({ onClose }: { onClose: () => void }) {
               play(0);
             }}
           >
-            <ArrowLeftIcon className="w-24px h-24px" /> {t("My Banker Details")}
+            <ArrowLeftIcon className="w-32px h-32px md:w-24px md:h-24px" /> {t("My Banker Details")}
           </div>
           <div className="flex gap-33px">
             <div className="flex gap-15px">

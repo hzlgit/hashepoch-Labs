@@ -33,7 +33,7 @@ export default function ResultModal({ bettAsset }: { bettAsset: string }) {
     [previousPeriod, openPeriod]
   );
 
-  const { data: userData } = useQuery({
+  const { data: userData, refetch } = useQuery({
     queryKey: ["user-game-result-data", openPeriod, gameId, bettAsset],
     enabled: !!openPeriod && !!gameId && modalOpend && !!token,
     queryFn: async () => {
@@ -104,14 +104,15 @@ export default function ResultModal({ bettAsset }: { bettAsset: string }) {
     }
   }, [data?.blockHash]);
 
-  const onOpend = () => {
+  const onOpend = async () => {
     if (modalOpend && isVisible) {
       setShow(true);
       stop(1);
 
       if (userData?.totalBetAmount > 0) {
-        if (userData?.totalAwardAmount > 0) {
-          console.log("中奖");
+        const { data } = await refetch();
+        if (data?.totalAwardAmount > 0) {
+          // console.log("中奖");
           play(2);
         } else {
           play(3);
@@ -232,7 +233,7 @@ export default function ResultModal({ bettAsset }: { bettAsset: string }) {
             </div>
           </div>
           <div className="flex gap-80px mb-50px">
-            <div className="w-236px h-80px rounded-12px border-1px border-solid border-[#bbb] flex flex-col justify-center items-center">
+            <div className="w-236px h-100px lg:h-80px rounded-12px border-1px border-solid border-[#bbb] flex flex-col justify-center items-center">
               <div className="text-14px mb-3px">{t("My Bets")}</div>
               <div className="font-bold text-20px">
                 <span>
@@ -241,7 +242,7 @@ export default function ResultModal({ bettAsset }: { bettAsset: string }) {
                 </span>
               </div>
             </div>
-            <div className="w-236px h-80px rounded-12px border-1px border-solid border-[#bbb] flex flex-col justify-center items-center">
+            <div className="w-236px h-100px lg:h-80px rounded-12px border-1px border-solid border-[#bbb] flex flex-col justify-center items-center">
               <div className="text-14px mb-3px">{t("My Rewards")}</div>
               <div className="font-bold text-20px">
                 {showResult
@@ -251,7 +252,7 @@ export default function ResultModal({ bettAsset }: { bettAsset: string }) {
               </div>
             </div>
           </div>
-          <div className="text-14px color-[var(--vt-c-white-75)]">
+          <div className="text-14px text-center color-[var(--vt-c-white-75)]">
             {t(
               "Winnings in Wallet Mode are automatically returned to the wallet; in Account Mode, funds go to the platform account and can be withdrawn."
             )}

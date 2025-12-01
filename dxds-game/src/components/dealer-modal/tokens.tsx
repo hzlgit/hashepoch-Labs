@@ -28,7 +28,7 @@ export default function TokenList({
   );
 
   return (
-    <div className="flex gap-37px mt-51px mb-54px">
+    <div className="flex gap-37px mt-51px mb-40px md:mb-30px">
       {slice(list, 0, 2).map((item, i) => (
         <div
           key={i}
