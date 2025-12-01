@@ -41,7 +41,7 @@ export default function DealerModal() {
   return (
     <div className="h-100% relative px-20px pt-14px ">
       <div className="w-100% flex justify-between font-bold">
-        <div className="modal-title text-24px font-bold pl-20px md:pl-40px text-shadow1 color-[var(--vt-c-black-75)]">
+        <div className="modal-title text-24px font-bold pl-40px text-shadow1 color-[var(--vt-c-black-75)]">
           {t("Banker Details")}
         </div>
         <div className="bg3-gray relative mt-2px pl-63px pr-14px box-border">
@@ -93,8 +93,8 @@ export default function DealerModal() {
           selected={coin}
           onChange={setCoin}
         />
-        <div className="flex gap-15px mb-29px">
-          <div className="w-209px h-130px md:h-98px rounded-12px border-1px border-solid border-[#bbb] flex flex-col justify-center items-center">
+        <div className="flex gap-15px mb-15px">
+          <div className="w-209px h-93px rounded-12px border-1px border-solid border-[#bbb] flex flex-col justify-center items-center">
             <div className="text-16px mb-3px">{t("Margin Requirement")}</div>
             <div className="font-bold text-20px">
               <span>
@@ -105,7 +105,7 @@ export default function DealerModal() {
               </span>
             </div>
           </div>
-          <div className="w-308px h-130px md:h-98px rounded-12px  border-1px border-solid border-[var(--vt-c-main1)] bg-[var(--vt-c-main1)] color-#000 flex flex-col justify-center items-center">
+          <div className="w-308px h-93px rounded-12px bg-[var(--vt-c-main1)] color-#000 flex flex-col justify-center items-center">
             <div className="text-16px mb-3px">{t("My Banker Stake")}</div>
             <div className="font-bold text-20px flex items-center gap-22px">
               <span>
@@ -121,7 +121,7 @@ export default function DealerModal() {
               {numeral(coin?.gameBankerFeeRate).format("0.[00]%")}
             </div>
           </div>
-          <div className="w-209px h-130px md:h-98px rounded-12px border-1px border-solid border-[#bbb] flex flex-col justify-center items-center">
+          <div className="w-209px h-93px rounded-12px border-1px border-solid border-[#bbb] flex flex-col justify-center items-center">
             <div className="text-16px mb-3px">{t("My Pool Ratio")}</div>
             <div className="font-bold text-20px">
               <span>{numeral(data?.bankerUserRate * 100).format("0.00")} </span>
@@ -129,8 +129,8 @@ export default function DealerModal() {
             </div>
           </div>
         </div>
-        <div className="text-14px mb-14px color-[var(--vt-c-main1)]">{t("My Investment")}</div>
-        <div className="w-453px h-50px zz-input mb-8px">
+        <div className="text-14px mb-14px">{t("My Investment")}</div>
+        <div className="w-453px h-50px zz-input">
           <input
             v-model="value"
             placeholder={t("Amount Limit: %min%-%max%", {
@@ -141,7 +141,7 @@ export default function DealerModal() {
             onChange={(v) => setAmt(v.target.value)}
           />
         </div>
-        <div className="text-14px mt-8px mb-27px flex items-center gap-18px">
+        <div className="text-14px mt-8px mb-18px flex items-center gap-18px">
           <div>{t("Account Balance")}</div>
           <div>
             {numeral(userData?.balanceAmount).format("0,0.00")}{" "}
@@ -149,7 +149,7 @@ export default function DealerModal() {
           </div>
         </div>
         <div
-          className={`cursor-pointer w-282px h-60px text-20px text-center color-#222 line-height-60px font-bold sure-bg1  ${
+          className={`cursor-pointer w-282px h-60px text-20px text-center line-height-60px font-bold sure-bg1  ${
             loading ? "cursor-no-drop" : ""
           }`}
           onClick={() => {
@@ -170,7 +170,7 @@ export default function DealerModal() {
         >
           {t(loading ? "Loading..." : "Confirm Banker")}
         </div>
-        <div className="text-14px text-center  mt-20px">
+        <div className="text-13px mt-20px">
           {t(
             "By joining the banker pool, you receive dividend payouts from house profits and also cover counter-party losses when the round results in a deficit."
           )}

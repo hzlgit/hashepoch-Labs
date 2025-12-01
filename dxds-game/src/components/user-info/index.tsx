@@ -7,19 +7,19 @@ export default function UserInfo({ data }: { data: any }) {
   const { t } = useTranslation();
   return (
     <div className="w-246px px-18px pt-12px box-border">
-      <div className="flex items-center">
+      <div className="flex items-center mb-15px">
         <div className="w-62px h-68px flex justify-center items-center mr-16px">
           <Contact className="w-35px h-35px color-[rgba(0,0,0,0.75)]" />
         </div>
         <div>
-          <div className="text-18px">
-            <span className="color-#00FFEF mr-4px font-bold">ID</span>
+          <div className="text-18px ">
+            <span className="color-#00FFEF mr-4px">ID</span>
             <span className="font-bold">{data?.userNo}</span>
           </div>
           {/* <div className="text-14px mt-5px flex w-52px h-20px rounded-6px color-#FFDF00 border-1px border-solid border-#FFDF00 items-center justify-center">
             {formatAccount(data?.address ?? "", 4, 10)}
           </div> */}
-          <div className="text-18px line-height-27px font-bold ws-nowrap">
+          <div className="text-18px  line-height-27px mb-15px font-bold ws-nowrap">
             {formatAccount(data?.address ?? "", 4, 4)}
           </div>
         </div>

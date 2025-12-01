@@ -281,7 +281,7 @@ export default function HomeView() {
           </div>
         </div>
         <div className="bg2">
-          <div className="w-100% flex justify-between mt-20px md:mt-17px mb-51px">
+          <div className="w-100% flex justify-between mt-17px mb-51px">
             <div
               className={`style-btn style-btn1 ${mode === 1 ? "show" : ""}`}
               onClick={() => {
