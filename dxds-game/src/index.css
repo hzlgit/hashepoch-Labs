@@ -50,10 +50,10 @@ a:hover {
   color: #535bf2;
 }
 ::-webkit-scrollbar {
-  width: 5px;
+  width: 0;
   height: 0;
   position: absolute;
-  background-color: transparent;
+  background-color: #000;
 }
 
 /*定义滚动条轨道 内阴影+圆角*/
@@ -88,11 +88,11 @@ body {
 }
 
 .animate {
-  animation: heart 2s infinite;
+  animation: heart 1s infinite;
 }
 
 .animate1 {
-  animation: heart 1s infinite;
+  animation: heart 2s infinite;
 }
 
 .digit-container1 {
