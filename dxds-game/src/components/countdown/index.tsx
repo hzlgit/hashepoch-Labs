@@ -47,7 +47,7 @@ export default function CountDown({
         />
         <div
           className={`countdown w-84px h-96px absolute top-0 left-0 z-3 text-center line-height-96px text-36px font-bold ${
-            time < 11 ? "animate" : ""
+            time < 11 ? "animate1" : ""
           }`}
         >
           {numeral(time).format("00")}
