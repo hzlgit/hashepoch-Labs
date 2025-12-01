@@ -195,7 +195,7 @@ export default function ResultModal({ bettAsset }: { bettAsset: string }) {
           </div>
           <div className="flex items-center gap-18px mb-38px">
             <div
-              className={`winner-result mode1 ${
+              className={`winner-result ${
                 Number(data?.gameResult?.["1"]) === 1 && showResult
                   ? "active"
                   : ""
@@ -204,7 +204,7 @@ export default function ResultModal({ bettAsset }: { bettAsset: string }) {
               {t("Big")}
             </div>
             <div
-              className={`winner-result mode1 ${
+              className={`winner-result ${
                 Number(data?.gameResult?.["1"]) === 2 && showResult
                   ? "active"
                   : ""
@@ -213,7 +213,7 @@ export default function ResultModal({ bettAsset }: { bettAsset: string }) {
               {t("Small")}
             </div>
             <div
-              className={`winner-result mode2 ${
+              className={`winner-result ${
                 Number(data?.gameResult?.["2"]) === 1 && showResult
                   ? "active"
                   : ""
@@ -222,7 +222,7 @@ export default function ResultModal({ bettAsset }: { bettAsset: string }) {
               {t("Odd")}
             </div>
             <div
-              className={`winner-result mode2 ${
+              className={`winner-result ${
                 Number(data?.gameResult?.["2"]) === 2 && showResult
                   ? "active"
                   : ""

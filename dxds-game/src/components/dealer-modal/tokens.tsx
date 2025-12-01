@@ -97,12 +97,12 @@ export default function TokenList({
           onClick={() => play(0)}
         >
           <img
-            src={isList ? selected?.tokenLogo : slice(list, 2)?.[0]?.tokenLogo}
+            src={isList ? selected?.tokenLogo : "/images/token-other.png"}
             alt=""
             className="w-30px h-30px rounded-100% "
           />
           <div className="flex items-center flex-1 justify-center">
-            {isList ? selected?.tokenSymbol : slice(list, 2)?.[0]?.tokenSymbol}
+            {isList ? selected?.tokenSymbol : t("Other")}
           </div>
           <ArrowDownIcon className="arrow" />
         </div>

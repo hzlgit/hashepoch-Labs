@@ -41,7 +41,7 @@ export default function HomeView() {
     changeModalOpend,
     setOpenPeriod,
   } = useAppStateStore();
-  const { data: config, refetch: refetchGameConfig } = useGameData();
+  const { data: config } = useGameData();
 
   const [mode, setMode] = useState(1);
   const [size, setSize] = useState<number>();
@@ -75,7 +75,7 @@ export default function HomeView() {
   const { data: bankerData } = useBankerData(coin?.assetType);
 
   useEffect(() => {
-    if (config?.assetConfig?.length > 0 && !coin?.assetType) {
+    if (config?.assetConfig?.length > 0) {
       setCoin(config?.assetConfig?.[0]);
     }
   }, [config]);
@@ -93,7 +93,6 @@ export default function HomeView() {
         setPreviousPeriod(current?.previousPeriod);
         refetchUserData();
         refetchDrawData();
-        refetchGameConfig();
         recordRef.current?.refetch();
       }
     }
@@ -103,7 +102,6 @@ export default function HomeView() {
     refetchUserData,
     setPreviousPeriod,
     refetchDrawData,
-    refetchGameConfig,
   ]);
 
   useEffect(() => {
@@ -248,9 +246,9 @@ export default function HomeView() {
 
   return (
     <div
-      className={`game-home-view mode${mode}-theme ${
-        mode === 2 ? "mode2" : ""
-      } ${loadEnd ? "visible-view" : ""}`}
+      className={`game-home-view ${mode === 2 ? "mode2" : ""} ${
+        loadEnd ? "visible-view" : ""
+      }`}
     >
       <div className="main-box">
         <Header />

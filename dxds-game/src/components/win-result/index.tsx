@@ -81,7 +81,7 @@ export default function WinResult({ mode, data }: { mode: number; data: any }) {
         <div className="text-center">
           <div className="text-14px mb-13px">
             <span className="mr-7px">{t("Draw Result")}</span>
-            <span className="color-[var(--theme-color)]">{t("Hash")}</span>
+            <span className="color-#00FFEF">{t("Hash")}</span>
           </div>
 
           <div className="counter-container flex">
@@ -187,7 +187,6 @@ export const DigitScroller = ({
   useEffect(() => {
     if (totalScrollDistance) {
       setActived(false);
-      translateY.reset();
       translateY.start(-totalScrollDistance * CONFIG.DIGIT_HEIGHT).then(() => {
         if (isActive) {
           setTimeout(() => {
@@ -218,7 +217,7 @@ export const DigitScroller = ({
         {characterSequence.map((char, idx) => (
           <div
             key={idx}
-            className={`digit  ${actived && isActive ? "active1" : ""}`}
+            className={`digit ${actived && isActive ? "active" : ""}`}
             style={{
               transition: "all 0.3s ease",
             }}
